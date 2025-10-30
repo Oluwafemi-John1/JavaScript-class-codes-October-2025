@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid col-lg-6 col-md-8 col-10 mx-auto rounded-3 mt-lg-5 mt-md-4 mt-3 p-lg-4 p-3 shadow">
+        <h1 class="text-center text-decoration-underline my-2">Jumia Alata</h1>
+        <input type="text" id="item" placeholder="Add am item here"
+            class="form-control shadow-none form-control-sm my-2">
+        <small id="errorMessage" class="text-danger" style="display: none;">This input cannot be empty!</small>
+        <button class="btn btn-sm btn-dark w-100 my-2" onclick="addItem()">Submit</button>
+        <div class="alert alert-success p-2 text-center mt-5" id="showInfo">Items added will be displayed here...</div>
+        <div id="show"></div>
+
+    </div>
+</body>
+<script>
+    const allItems = []
+
+    const addItem = () => {
+        if (item.value.trim() === '') {
+            // alert('empty input')
+            errorMessage.style.display = 'block'
+        } else {
+            errorMessage.style.display = 'none'
+            showInfo.style.display = 'none'
+
+            allItems.push(item.value)
+            // console.log(allItems);
+            displayItems()
+            item.value = ''
+        }
+    }
+
+    const deleteItem = (index) => {
+        console.log(index);
+        const confirmMessage = confirm('Are you sure you want to delete this item?')
+        console.log(confirmMessage);
+        if(confirmMessage) {
+            allItems.splice(index, 1)
+            console.log(allItems);
+            displayItems()
+        } else {
+            displayItems()
+        }
+    }
+
+
+
+    function displayItems() {
+        show.innerHTML = ''
+        for (i = 0; i < allItems.length; i++) {
+            show.innerHTML += `
+                <p>${i + 1}. ${allItems[i]}</p>
+                <button onclick="deleteItem(${i})" class="btn btn-sm btn-danger">Delete</button>
+                <button class="btn btn-sm btn-warning">Edit</button>
+            `
+        }
+    }
+
+    const foods = ['Amala', 'Iyan', 'Banku', 'Eba', 'Semo']
+    // foods.splice(startingIndex, numberOfItemsToDelete, replacement)
+    foods.splice(1, 2, 'Meat Pie')
+    console.log(foods);
+</script>
+
+</html>

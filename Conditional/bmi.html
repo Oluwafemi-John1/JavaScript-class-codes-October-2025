@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Know your weight status</h3>
+    <input type="number" placeholder="Height (in metres)" id="height">
+    <input type="number" placeholder="Weight (in Kilograms)" id="weight">
+    <button onclick="checkBMI()">Check</button>
+    <div id="showStatus">Check your condition here</div>
+</body>
+<script>
+//     Underweight: Below 18.5
+// Healthy Weight: 18.5–24.9
+// Overweight: 25.0–29.9
+// Obese: 30.0 or greater 
+
+const checkBMI = () => {
+    if(height.value == '' || weight.value == '') {
+        alert('Fill in the empty space(S)')
+    } else {
+        console.log(height.value, weight.value);
+        const formula = Number(weight.value)/(Number(height.value)**2)
+        console.log(formula);
+        if(formula < 18.5) {
+            showStatus.innerHTML = "You are underweight, you need to eat more"
+        } else if(formula >= 18.5 && formula <= 24.9) {
+            showStatus.innerHTML = "You are healthy, keep it up"
+        } else if(formula >= 25 && formula <= 29.9) {
+            showStatus.innerHTML = "You are overweight, keep it down"
+        } else if(formula >= 30) {
+            showStatus.innerHTML = "You are obese, visit an hospital ASAP"
+        }
+    }
+}
+</script>
+</html>

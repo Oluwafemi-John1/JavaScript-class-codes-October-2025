@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Area of a Circle -->
+    <input id="rad" type="number" placeholder="Radius">
+    <button onclick="calculateArea()">Calculate Area</button>
+    <div id="showArea">Area of the circle will be shown here...</div>
+
+    <!-- Area of a Triangle -->
+    <input id="base" type="number" placeholder="base">
+    <input id="height" type="number" placeholder="height">
+    <button onclick="calculateTriangleArea()">Calculate Area</button>
+    <div id="showTriangleArea">Area of the triangle will be shown here...</div>
+
+
+
+    <!-- All users are dumb -->
+</body>
+<script>
+    const calculateArea = () => {
+        const convertedRad = Number(rad.value)
+        const pi = 22/7
+        const formula = (pi * (convertedRad**2)).toFixed(2)
+        showArea.innerHTML = "The answer is " + formula + "cm²"
+    }
+
+    const calculateTriangleArea = () => {
+        const convertedBase = Number(base.value)
+        const convertedHeight = Number(height.value)
+        const formula = 1/2 * convertedBase * convertedHeight
+        showTriangleArea.innerHTML = "The answer is " + formula + "cm²"
+    }
+</script>
+</html>

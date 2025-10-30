@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 4px;
+            padding: 1px;
+            border: 2px dotted saddlebrown;
+        }
+    </style>
+</head>
+<body>
+    <div id="show"></div>
+    <div id="img"></div>
+    <div id="statuss">Your status will show here</div>
+</body>
+<script>
+    // Categories of operator: unary, binary, ternary operator
+    // 2 + 3         2 & 3 - operands, + - operator
+    // typeof(4)        4 - operand typeof() - operator
+    // condition?'if true':'if false'
+    // 2+2==5?show.innerHTML = 'correct':show.innerHTML = 'incorrect'
+
+
+    // const food = 'Rice and stew'
+    // const drink = 'omi aburo'
+    // const dessert = 'pure water'
+
+    // show.innerHTML = 'After I finish class, I will eat ' + food + ' and I will also take ' + drink + ' and also ' + dessert + ' as a dessert'
+    
+    // show.innerHTML = `<h3 style="color: #f11">After I finish class, I will eat ${food} and I will also take ${drink} and also ${dessert} as a dessert</h3>`
+
+    // img.innerHTML = `<img width="200" src="https://cdn.shopify.com/s/files/1/0067/1576/8885/files/nigerian-wedding-dishes-how-to-choose-the-best-dishes-for-your-reception-party_1024x1024.jpg?v=1710256684" alt="">`
+
+    // 'DOM Manipulation'
+    const gender = 'Male'
+    if(gender == 'Male') {
+        statuss.innerHTML = 'You are a man'
+        // statuss.style.textAlign = 'center'
+        // statuss.style.color = 'rebeccapurple'
+        statuss.style.cssText = "color: red; background-color: #0ff; text-align: center; margin: 4px; padding: 1px; border: 2px dotted saddlebrown;"
+    } else if(gender == 'Female') {
+        statuss.innerHTML = 'You are a woman'
+    } else {
+        statuss.innerHTML = 'You are unknown'
+    }
+</script>
+</html>
