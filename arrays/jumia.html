@@ -20,9 +20,39 @@
         <div id="show"></div>
 
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Item</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="editInput" placeholder="Enter the new item here"
+                        class="form-control shadow-none form-control-sm my-2">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button onclick="editGangan()" type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 <script>
     const allItems = []
+    let editIndex = 0;
+
+
+    // let editIndex; // Declaration stage
+    // editIndex = 0; // Initialisation stage
+    // let lagbaja = 'Lakasegbe'
 
     const addItem = () => {
         if (item.value.trim() === '') {
@@ -43,7 +73,7 @@
         console.log(index);
         const confirmMessage = confirm('Are you sure you want to delete this item?')
         console.log(confirmMessage);
-        if(confirmMessage) {
+        if (confirmMessage) {
             allItems.splice(index, 1)
             console.log(allItems);
             displayItems()
@@ -52,6 +82,20 @@
         }
     }
 
+    const editItem = (index) => {
+        console.log(index);
+        editIndex = index
+    }
+
+    const editGangan = () => {
+        if(editInput.value.trim() == '') {
+            alert('fill in the empty input')
+        } else {
+            console.log(editInput.value);
+            allItems.splice(editIndex, 1, editInput.value)
+            displayItems()
+        }
+    }
 
 
     function displayItems() {
@@ -60,7 +104,7 @@
             show.innerHTML += `
                 <p>${i + 1}. ${allItems[i]}</p>
                 <button onclick="deleteItem(${i})" class="btn btn-sm btn-danger">Delete</button>
-                <button class="btn btn-sm btn-warning">Edit</button>
+                <button onclick="editItem(${i})" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-sm btn-warning">Edit</button>
             `
         }
     }
