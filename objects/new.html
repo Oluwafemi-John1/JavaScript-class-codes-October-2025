@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Temu Reloaded</h1>
+    <input type="text" placeholder="Item" id="item">
+    <input type="number" placeholder="Price" id="price">
+    <input type="text" placeholder="Description" id="description">
+    <input type="number" placeholder="Quantity" id="quantity">
+    <button onclick="addProduct()">Submit</button>
+    <div id="show"></div>
+</body>
+<script>
+    let allProducts = [];
+
+    const addProduct = () => {
+        if(item.value.trim() === '' || price.value.trim() === '' || description.value.trim() === '' || quantity.value.trim() === '') {
+            alert('heeeee')
+        } else {
+            const itemObj = {
+                items: item.value,
+                prices: price.value,
+                desc: description.value,
+                qty: quantity.value
+            }
+            // console.log(itemObj);
+            allProducts.push(itemObj)
+            console.log(allProducts);
+            show.innerHTML = ''
+            for(i=0; i<allProducts.length; i++) {
+                show.innerHTML += `
+                    <h2>${i+1}</h2>
+                    <p>${allProducts[i].items}</p>
+                    <p>${allProducts[i].prices}</p>
+                    <p>${allProducts[i].desc}</p>
+                    <p>${allProducts[i].qty}</p>
+                `
+            }
+
+        }
+    }
+</script>
+</html>
