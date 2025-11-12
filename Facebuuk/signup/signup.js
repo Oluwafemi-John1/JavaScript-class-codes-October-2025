@@ -1,3 +1,28 @@
+// let allUsers = []
+// if (localStorage.facebuukUsers) {
+//     const fetched = JSON.parse(localStorage.getItem('facebuukUsers'))
+//     allUsers = fetched
+// } else {
+//     allUsers = []
+// }
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyARbzKfSMwejapcQFw75fmcNxSKukee0F4",
+    authDomain: "facebuuk-76333.firebaseapp.com",
+    projectId: "facebuuk-76333",
+    storageBucket: "facebuuk-76333.firebasestorage.app",
+    messagingSenderId: "1076093407637",
+    appId: "1:1076093407637:web:2767371f6a3d62a0de269c"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app)
+
 const signUp = () => {
     if (firstName.value.trim() === '' || lastName.value.trim() === '' || email.value.trim() === '' || password.value.trim() === '') {
         showError.style.display = 'block'
@@ -13,23 +38,27 @@ const signUp = () => {
         let regexString = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
         const confirmEmail = regexString.test(userObj.mail)
         if (confirmEmail) {
-            const found = allUsers.find(user => user.mail === userObj.mail)
-            if (found) {
-                alert('account already exists')
-            } else {
-                signUpButton.innerHTML = `
+            signUpButton.innerHTML = `
                         <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
                         <span role="status">Loading...</span>
                 `
-                
-                setTimeout(()=>{
-                    window.location.href = "../signin/signin.html"
-                }, 2000)
-            }
+            const {mail, pass} = userObj
+            createUserWithEmailAndPassword(auth, mail, pass)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    console.log(errorCode);
+                });
+            setTimeout(() => {
+                window.location.href = "../signin/signin.html"
+            }, 2000)
         } else {
             showError2.style.display = 'block'
         }
-
 
         firstName.value = ''
         lastName.value = ''
@@ -37,14 +66,6 @@ const signUp = () => {
         password.value = ''
     }
 }
-
-// let allUsers = []
-// if (localStorage.facebuukUsers) {
-//     const fetched = JSON.parse(localStorage.getItem('facebuukUsers'))
-//     allUsers = fetched
-// } else {
-//     allUsers = []
-// }
 
 // localStorage.facebuukUsers?allUsers=JSON.parse(localStorage.getItem('facebuukUsers')):allUsers=[]
 
