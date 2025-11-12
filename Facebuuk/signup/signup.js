@@ -26,13 +26,19 @@ const signUp = () => {
         let regexString = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
         const confirmEmail = regexString.test(userObj.mail)
         if (confirmEmail) {
-            const found = allUsers.find(user=>user.mail === userObj.mail)
-            if(found) {
+            const found = allUsers.find(user => user.mail === userObj.mail)
+            if (found) {
                 alert('account already exists')
             } else {
+                signUpButton.innerHTML = `
+                        <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+                        <span role="status">Loading...</span>
+                `
                 allUsers.push(userObj)
                 localStorage.setItem('facebuukUsers', JSON.stringify(allUsers))
-                window.location.href = "../signin/signin.html"
+                setTimeout(()=>{
+                    window.location.href = "../signin/signin.html"
+                }, 2000)
             }
         } else {
             showError2.style.display = 'block'
