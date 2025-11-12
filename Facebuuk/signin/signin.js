@@ -28,7 +28,6 @@ const signInUser = () => {
         const signInDetails = {
             mail: email.value,
             pass: password.value,
-            logInTime: new Date().toLocaleTimeString()
         }
         console.log(signInDetails);
         const { mail, pass } = signInDetails
