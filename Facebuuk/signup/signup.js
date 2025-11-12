@@ -1,10 +1,3 @@
-// let allUsers = []
-// if (localStorage.facebuukUsers) {
-//     const fetched = JSON.parse(localStorage.getItem('facebuukUsers'))
-//     allUsers = fetched
-// } else {
-//     allUsers = []
-// }
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
@@ -45,7 +38,10 @@ const signUpUser = () => {
                 const user = userCredential.user;
                 console.log(user);
                 user.displayName = `${firstName.value} ${lastName.value}`
-                // Signed in 
+                sendEmailVerification(auth.currentUser)
+                    .then(() => {
+                        console.log('Email verification sent!');
+                    });
                 signUpButton.innerHTML = `<i class="fas fa-user-plus"></i> Create Account`
                 setTimeout(() => {
                     window.location.href = "../signin/signin.html"
@@ -69,15 +65,18 @@ const signUpUser = () => {
                 }
                 signUpButton.innerHTML = `<i class="fas fa-user-plus"></i> Create Account`
             });
-
-        // firstName.value = ''
-        // lastName.value = ''
-        // email.value = ''
-        // password.value = ''
     }
 }
 
 window.signUpUser = signUpUser
+
+// let allUsers = []
+// if (localStorage.facebuukUsers) {
+//     const fetched = JSON.parse(localStorage.getItem('facebuukUsers'))
+//     allUsers = fetched
+// } else {
+//     allUsers = []
+// }
 // localStorage.facebuukUsers?allUsers=JSON.parse(localStorage.getItem('facebuukUsers')):allUsers=[]
 
 // let newUsers = JSON.parse(localStorage.getItem('facebuukUsers')) || []
