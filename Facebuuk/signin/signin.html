@@ -13,9 +13,15 @@
 <body>
     <div class="container-fluid col-lg-6 col-md-6 col-10 mt-lg-5 mt-md-4 mt-3 mx-auto rounded-5 p-lg-5 p-3 shadow">
         <h2 class="text-center">Sign In</h2>
+        <p id="showError" style="display: none" class="alert alert-danger p-2 text-center text-danger"><img
+                class="img-fluid" width="20" src="../images/caution.png" alt=""> Please fill in all inputs!</p>
+        <p id="showError2" style="display: none" class="alert alert-danger p-2 text-center text-danger"><img
+                class="img-fluid" width="20" src="../images/caution.png" alt=""> Account does not exist!</p>
+        <p id="showError3" style="display: none" class="alert alert-danger p-2 text-center text-danger"><img
+                class="img-fluid" width="20" src="../images/caution.png" alt=""> Email or password is incorrect!</p>
         <input type="text" class="form-control shadow-none my-3" id="email" placeholder="Email">
         <input type="password" class="form-control shadow-none my-3" id="password" placeholder="Password">
-        <button class="btn btn-dark my-3 w-100">Submit</button>
+        <button onclick="signIn()" class="btn btn-dark my-3 w-100">Submit</button>
         <p>New to Facebuuk? Sign up <a href="../signup/signup.html">here</a></p>
     </div>
 </body>
