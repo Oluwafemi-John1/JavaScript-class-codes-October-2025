@@ -6,7 +6,7 @@
 //     allUsers = []
 // }
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
 
 // Your web app's Firebase configuration
@@ -35,40 +35,45 @@ const signUpUser = () => {
             mail: email.value,
             pass: password.value
         }
-        let regexString = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-        const confirmEmail = regexString.test(userObj.mail)
-        if (confirmEmail) {
-            signUpButton.innerHTML = `
+        signUpButton.innerHTML = `
                         <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
                         <span role="status">Loading...</span>
                 `
-            const { mail, pass } = userObj
-            createUserWithEmailAndPassword(auth, mail, pass)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-                    console.log(user);
-                    // setTimeout(() => {
-                    //     window.location.href = "../signin/signin.html"
-                    // }, 2000)
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    console.log(errorCode);
-                    if (errorCode === "auth/password-does-not-meet-requirements") {
-                        showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i> <span>Password requirements not met</span></small>`
-                        showError2.style.display = 'block'
-                    }
+        const { mail, pass } = userObj
+        createUserWithEmailAndPassword(auth, mail, pass)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+                user.displayName = `${firstName.value} ${lastName.value}`
+                // Signed in 
+                signUpButton.innerHTML = `<i class="fas fa-user-plus"></i> Create Account`
+                setTimeout(() => {
+                    window.location.href = "../signin/signin.html"
+                }, 1000)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                console.log(errorCode);
+                if (errorCode === "auth/password-does-not-meet-requirements") {
+                    showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Password requirements not met!</span></small>`
+                    showError2.style.display = 'block'
+                }
 
-                    signUpButton.innerHTML = `<i class="fas fa-user-plus"></i> Create Account`
-                });
-        } else {
-            showError2.style.display = 'block'
-        }
+                if (errorCode === "auth/invalid-email") {
+                    showError2.style.display = 'block'
+                }
 
-        firstName.value = ''
-        lastName.value = ''
-        email.value = ''
-        password.value = ''
+                if (errorCode === "auth/email-already-in-use") {
+                    showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Email already in use!</span></small>`
+                    showError2.style.display = 'block'
+                }
+                signUpButton.innerHTML = `<i class="fas fa-user-plus"></i> Create Account`
+            });
+
+        // firstName.value = ''
+        // lastName.value = ''
+        // email.value = ''
+        // password.value = ''
     }
 }
 
