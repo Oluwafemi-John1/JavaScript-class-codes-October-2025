@@ -66,7 +66,7 @@
                     <span>Email or password is incorrect!</span>
                 </div>
 
-                <form class="auth-form" onsubmit="event.preventDefault(); signIn();">
+                <section class="auth-form">
                     <div class="form-group">
                         <label for="email">
                             <i class="fas fa-envelope"></i> Email Address
@@ -91,10 +91,10 @@
                         <a href="#" class="forgot-link">Forgot password?</a>
                     </div>
 
-                    <button type="submit" class="btn-submit">
+                    <button onclick="signInUser()" class="btn-submit">
                         <i class="fas fa-sign-in-alt"></i> Sign In
                     </button>
-                </form>
+                </section>
 
                 <div class="divider">
                     <span>or continue with</span>
@@ -116,6 +116,6 @@
         </div>
     </div>
 </body>
-<script src="signin.js"></script>
+<script type="module" src="signin.js"></script>
 
 </html>
