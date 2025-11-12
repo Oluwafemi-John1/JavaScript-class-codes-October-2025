@@ -62,7 +62,7 @@
                     <span>Invalid email entered!</span>
                 </div>
 
-                <form class="auth-form" onsubmit="event.preventDefault(); signUp();">
+                <section class="auth-form">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">
@@ -94,13 +94,13 @@
                         </label>
                         <input type="password" class="form-input" id="password" placeholder="Create a password"
                             autocomplete="new-password">
-                        <small class="form-text">Must be at least 8 characters</small>
+                        <small class="form-text">Password must not be less than 8 characters, and must include number, special character, uppercase and lowercase characters</small>
                     </div>
 
-                    <button type="submit" id="signUpButton" class="btn-submit">
+                    <button onclick="signUpUser()" id="signUpButton" class="btn-submit">
                         <i class="fas fa-user-plus"></i> Create Account
                     </button>
-                </form>
+                </section>
 
                 <div class="divider">
                     <span>or continue with</span>

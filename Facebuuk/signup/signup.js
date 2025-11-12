@@ -23,7 +23,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
 
-const signUp = () => {
+const signUpUser = () => {
     if (firstName.value.trim() === '' || lastName.value.trim() === '' || email.value.trim() === '' || password.value.trim() === '') {
         showError.style.display = 'block'
         showError2.style.display = 'none'
@@ -42,20 +42,25 @@ const signUp = () => {
                         <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
                         <span role="status">Loading...</span>
                 `
-            const {mail, pass} = userObj
+            const { mail, pass } = userObj
             createUserWithEmailAndPassword(auth, mail, pass)
                 .then((userCredential) => {
-                    // Signed up 
                     const user = userCredential.user;
-                    // ...
+                    console.log(user);
+                    // setTimeout(() => {
+                    //     window.location.href = "../signin/signin.html"
+                    // }, 2000)
                 })
                 .catch((error) => {
                     const errorCode = error.code;
                     console.log(errorCode);
+                    if (errorCode === "auth/password-does-not-meet-requirements") {
+                        showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i> <span>Password requirements not met</span></small>`
+                        showError2.style.display = 'block'
+                    }
+
+                    signUpButton.innerHTML = `<i class="fas fa-user-plus"></i> Create Account`
                 });
-            setTimeout(() => {
-                window.location.href = "../signin/signin.html"
-            }, 2000)
         } else {
             showError2.style.display = 'block'
         }
@@ -67,6 +72,7 @@ const signUp = () => {
     }
 }
 
+window.signUpUser = signUpUser
 // localStorage.facebuukUsers?allUsers=JSON.parse(localStorage.getItem('facebuukUsers')):allUsers=[]
 
 // let newUsers = JSON.parse(localStorage.getItem('facebuukUsers')) || []
