@@ -40,6 +40,9 @@ const signInUser = () => {
                 console.log(user);
                 showError2.style.display = 'none'
                 showError3.style.display = 'none'
+                setTimeout(() => {
+                    window.location.href = "../dashboard/dashboard.html"
+                }, 1000)
             })
             .catch((error) => {
                 const errorCode = error.code;
