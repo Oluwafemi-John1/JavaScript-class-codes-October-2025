@@ -59,7 +59,62 @@ const signInUser = () => {
             });
     }
 }
+
+const signGoogle = () => {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
+            console.log(user);
+            setTimeout(() => {
+                window.location.href = "../dashboard/dashboard.html"
+            }, 1000)
+        }).catch((error) => {
+            const errorCode = error.code;
+            console.log(errorCode);
+            if (errorCode === "auth/popup-closed-by-user") {
+                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Popup closed by user. Try again!</span></small>`
+                showError2.style.display = 'block'
+            }
+            if (errorCode === "auth/operation-not-allowed") {
+                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation!</span></small>`
+                showError2.style.display = 'block'
+            }
+            if (errorCode === "auth/unauthorized-domain") {
+                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation</span></small>`
+                showError2.style.display = 'block'
+            }
+        });
+}
+
+const signGitHub = () => {
+    signInWithPopup(auth, gProvider)
+        .then((result) => {
+            const user = result.user;
+            console.log(user);
+            setTimeout(() => {
+                window.location.href = "../dashboard/dashboard.html"
+            }, 1000)
+        }).catch((error) => {
+            const errorCode = error.code;
+            console.log(errorCode);
+            if (errorCode === "auth/popup-closed-by-user") {
+                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Popup closed by user. Try again!</span></small>`
+                showError2.style.display = 'block'
+            }
+            if (errorCode === "auth/account-exists-with-different-credential") {
+                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You have already signed in with Google!</span></small>`
+                showError2.style.display = 'block'
+            }
+            if (errorCode === "auth/unauthorized-domain") {
+                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation</span></small>`
+                showError2.style.display = 'block'
+            }
+        });
+}
+
 window.signInUser = signInUser
+window.signGoogle = signGoogle;
+window.signGitHub = signGitHub;
 
 
 // const signIn = () => {
