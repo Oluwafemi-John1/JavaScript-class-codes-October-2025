@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
 
 // Your web app's Firebase configuration
@@ -67,6 +67,10 @@ const signGoogle = () => {
         .then((result) => {
             const user = result.user;
             console.log(user);
+            sendEmailVerification(auth.currentUser)
+                .then(() => {
+                    console.log('Email verification sent!');
+                });
             setTimeout(() => {
                 window.location.href = "../dashboard/dashboard.html"
             }, 1000)
@@ -93,6 +97,10 @@ const signGitHub = () => {
         .then((result) => {
             const user = result.user;
             console.log(user);
+            sendEmailVerification(auth.currentUser)
+                .then(() => {
+                    console.log('Email verification sent!');
+                });
             setTimeout(() => {
                 window.location.href = "../dashboard/dashboard.html"
             }, 1000)

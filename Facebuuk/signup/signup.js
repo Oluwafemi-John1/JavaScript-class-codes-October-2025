@@ -75,6 +75,10 @@ const signGoogle = () => {
         .then((result) => {
             const user = result.user;
             console.log(user);
+            sendEmailVerification(auth.currentUser)
+                .then(() => {
+                    console.log('Email verification sent!');
+                });
             setTimeout(() => {
                 window.location.href = "../dashboard/dashboard.html"
             }, 1000)
@@ -101,6 +105,10 @@ const signGitHub = () => {
         .then((result) => {
             const user = result.user;
             console.log(user);
+            sendEmailVerification(auth.currentUser)
+                .then(() => {
+                    console.log('Email verification sent!');
+                });
             setTimeout(() => {
                 window.location.href = "../dashboard/dashboard.html"
             }, 1000)
