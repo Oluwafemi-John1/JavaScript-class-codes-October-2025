@@ -23,6 +23,7 @@ const signInUser = () => {
     if (email.value.trim() === '' || password.value.trim() === '') {
         showError.style.display = 'block'
         showError2.style.display = 'none'
+        showError3.style.display = 'none'
     } else {
         showError.style.display = 'none'
         const signInDetails = {
@@ -35,21 +36,25 @@ const signInUser = () => {
             .then((userCredential) => {
                 const user = userCredential.user;
                 console.log(user);
-
+                showError2.style.display = 'none'
+                showError3.style.display = 'none'
             })
             .catch((error) => {
                 const errorCode = error.code;
                 console.log(errorCode);
                 if (errorCode === "auth/user-not-found") {
                     showError2.style.display = 'block'
+                    showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Account does not exist!</span></small>`
                 }
 
                 if (errorCode === "auth/wrong-password") {
                     showError3.style.display = 'block'
+                    showError3.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Email or Password is incorrect!</span></small>`
                 }
 
                 if (errorCode === "auth/invalid-credential") {
-                    showError2.style.display = 'block'
+                    showError3.style.display = 'block'
+                    showError3.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Email or Password is incorrect!</span></small>`
                 }
             });
     }
