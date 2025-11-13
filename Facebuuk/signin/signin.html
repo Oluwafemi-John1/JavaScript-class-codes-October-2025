@@ -88,7 +88,8 @@
                             <input type="checkbox" id="rememberMe">
                             <span>Remember me</span>
                         </label>
-                        <a href="#" class="forgot-link">Forgot password?</a>
+                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn forgot-link">Forgot
+                            password?</button>
                     </div>
 
                     <button onclick="signInUser()" class="btn-submit">
@@ -115,7 +116,44 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Reset your password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="showError4" class="alert-message error-message" style="display: none">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Please fill in your email!</span>
+                    </div>
+                    <div id="showInfo" class="alert-message success-message" style="display: none">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Password reset link sent to your email!</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <input type="email" class="form-input" id="emailReset" placeholder="Enter your email"
+                            autocomplete="email">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button onclick="sendResetEmail()" type="button" class="btn btn-primary"><i
+                            class="fas fa-sign-in-alt"></i> Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 <script type="module" src="signin.js"></script>
 
 </html>

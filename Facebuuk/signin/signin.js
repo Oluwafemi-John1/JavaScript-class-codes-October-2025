@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider, signInWithPopup, GithubAuthProvider } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
 
 // Your web app's Firebase configuration
@@ -122,9 +122,27 @@ const signGitHub = () => {
         });
 }
 
-window.signInUser = signInUser
+const sendResetEmail = () => {
+    if (emailReset.value.trim() === '') {
+        showError4.style.display = 'block'
+    } else {
+        showError4.style.display = 'none'
+        sendPasswordResetEmail(auth, emailReset.value)
+            .then(() => {
+                console.log('Password reset link sent');
+                showInfo.style.display = 'block'
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                console.log(errorCode);
+            });
+    }
+}
+
+window.signInUser = signInUser;
 window.signGoogle = signGoogle;
 window.signGitHub = signGitHub;
+window.sendResetEmail = sendResetEmail;
 
 
 // const signIn = () => {
