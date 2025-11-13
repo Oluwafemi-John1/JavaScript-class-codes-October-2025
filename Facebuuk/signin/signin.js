@@ -14,7 +14,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+const gProvider = new GithubAuthProvider();
 
 const fetched = JSON.parse(localStorage.getItem('facebuukUsers'))
 console.log(fetched);
@@ -72,16 +74,16 @@ const signGoogle = () => {
             const errorCode = error.code;
             console.log(errorCode);
             if (errorCode === "auth/popup-closed-by-user") {
-                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Popup closed by user. Try again!</span></small>`
-                showError2.style.display = 'block'
+                showError3.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Popup closed by user. Try again!</span></small>`
+                showError3.style.display = 'block'
             }
             if (errorCode === "auth/operation-not-allowed") {
-                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation!</span></small>`
-                showError2.style.display = 'block'
+                showError3.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation!</span></small>`
+                showError3.style.display = 'block'
             }
             if (errorCode === "auth/unauthorized-domain") {
-                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation</span></small>`
-                showError2.style.display = 'block'
+                showError3.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation</span></small>`
+                showError3.style.display = 'block'
             }
         });
 }
@@ -98,16 +100,16 @@ const signGitHub = () => {
             const errorCode = error.code;
             console.log(errorCode);
             if (errorCode === "auth/popup-closed-by-user") {
-                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Popup closed by user. Try again!</span></small>`
-                showError2.style.display = 'block'
+                showError3.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Popup closed by user. Try again!</span></small>`
+                showError3.style.display = 'block'
             }
             if (errorCode === "auth/account-exists-with-different-credential") {
-                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You have already signed in with Google!</span></small>`
-                showError2.style.display = 'block'
+                showError3.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You have already signed in with Google!</span></small>`
+                showError3.style.display = 'block'
             }
             if (errorCode === "auth/unauthorized-domain") {
-                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation</span></small>`
-                showError2.style.display = 'block'
+                showError3.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation</span></small>`
+                showError3.style.display = 'block'
             }
         });
 }
