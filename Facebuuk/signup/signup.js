@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
 
 
 // Your web app's Firebase configuration
@@ -14,7 +14,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 const signUpUser = () => {
     if (firstName.value.trim() === '' || lastName.value.trim() === '' || email.value.trim() === '' || password.value.trim() === '') {
@@ -68,7 +69,35 @@ const signUpUser = () => {
     }
 }
 
-window.signUpUser = signUpUser
+const signGoogle = () => {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const user = result.user;
+            console.log(user);
+            setTimeout(() => {
+                window.location.href = "../dashboard/dashboard.html"
+            }, 1000)
+        }).catch((error) => {
+            const errorCode = error.code;
+            console.log(errorCode);
+            if (errorCode === "auth/popup-closed-by-user") {
+                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>Popup closed by user. Try again!</span></small>`
+                showError2.style.display = 'block'
+            }
+            if (errorCode === "auth/operation-not-allowed") {
+                alert('operation not allowed')
+                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation!</span></small>`
+                showError2.style.display = 'block'
+            }
+            if (errorCode === "auth/unauthorized-domain") {
+                alert('unauthorized domain')
+                showError2.innerHTML = `<small><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;<span>You are not authorized for this operation</span></small>`
+                showError2.style.display = 'block'
+            }
+        });
+}
+window.signUpUser = signUpUser;
+window.signGoogle = signGoogle;
 
 // let allUsers = []
 // if (localStorage.facebuukUsers) {
